@@ -19,7 +19,10 @@ int main(void){
     int p1CR = 3;
     int p2CR = 3;
     //
-    getMove(position);
+    int place1;
+    int place2;
+    place1=getMove(position);
+    printf("the piece is in %d place\n",place1);
     //
     /*
     movePiece(position, gridToPos(4,6), gridToPos(4,4), 3, false, -1);
