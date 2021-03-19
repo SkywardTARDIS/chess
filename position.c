@@ -3,19 +3,19 @@
 #include "sense.h"
 
 #define DARK 0x0000
-#define LIGHT 0xFFF1
-#define WR 0xF00F
-#define BR 0xF101
-#define WN 0xFCE0
-#define BN 0xBAC4
-#define WB 0x073F
-#define BB 0x00FF
-#define WQ 0x701F
-#define BQ 0x30AE
-#define WK 0x07E1
-#define BK 0x3CA7
-#define WP 0xEFE0
-#define BP 0xADA8
+#define LIGHT 0x8C51
+#define WR 0x9806
+#define BR 0x7800
+#define WN 0xC2E6
+#define BN 0xdb60
+#define WB 0x1B17
+#define BB 0x210E
+#define WQ 0x70D4
+#define BQ 0x40AE//30AE
+#define WK 0x07E2
+#define BK 0x2424
+#define WP 0xB5A0
+#define BP 0xA380
 
 
 int main(void) {

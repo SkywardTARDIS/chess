@@ -13,7 +13,7 @@
 #define WQ 0x70D4
 #define BQ 0x40AE//30AE
 #define WK 0x07E2
-#define BK 0x2424
+#define BK 0x12E2
 #define WP 0xB5A0
 #define BP 0xA380
 
