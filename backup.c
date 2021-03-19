@@ -3,25 +3,19 @@
 #include "sense.h"
 #include "movepiece.h"
 #include <stdbool.h>
-#include "cursor.h"
+//#include "cursor.h"
 
-int main(void){
+//int main(void){
     char position[] = "rnbqkbnrpppppppp--------------------------------PPPPPPPPRNBQKBNR";
-//int main(void){  
-    //
-    pi_framebuffer_t *fb=getFrameBuffer();
-    sense_fb_bitmap_t *bm=fb->bitmap;
-    //
+int main(void){  
     setPos(position);
     //
-    bm->pixel[3][4]=CC;
+ //   bm->pixel[4][3]=CC;
     //
     int p1CR = 3;
     int p2CR = 3;
-    //
-    getMove(position);
-    //
-    /*
+  //  getMove();
+
     movePiece(position, gridToPos(4,6), gridToPos(4,4), 3, false, -1);
     movePiece(position, gridToPos(1,1), gridToPos(1,2), 3, false, -1);
     movePiece(position, gridToPos(3,6), gridToPos(3,4), 3, false, -1);
@@ -39,7 +33,7 @@ int main(void){
     movePiece(position, gridToPos(4,4), gridToPos(3,3), 0, false, -1);
     movePiece(position, gridToPos(4,1), gridToPos(4,3), 0, false, -1);
     movePiece(position, gridToPos(3,3), gridToPos(4,2), 0, true, gridToPos(4,2));
-    */
+
     printf("%s\n",position);
     return 0;
 }
