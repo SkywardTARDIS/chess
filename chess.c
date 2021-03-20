@@ -13,7 +13,10 @@ int p1CR = 3;
 int p2CR = 3;
 int main(void){
     char position[] = "rnbqkbnrpppppppp--------------------------------PPPPPPPPRNBQKBNR";
-
+    char dummy[]="----------------------------------------------------------------";
+    for(int i=0; i<64; i++){
+        dummy[i]=position[i];
+    }
 //int main(void){  
     //
     pi_framebuffer_t *fb=getFrameBuffer();
@@ -32,20 +35,12 @@ int main(void){
     int mate=0;
     //you can only move your own pieces
     int ownPiece=0;
+    //is a player in regular check?
+    int inCheck=0;
 
-    while(game){
+    while(game==1){
 
-        if(pturn==1){
-            mate=checkmate(position, pturn, EPP, EPL);
-            if(check(position, pturn)){
-                printf("P1 in check!\n");
-                if(mate==1){
-                    printf("P1 in checkmate!\n");
-                }
-            }
-            else if(mate==1){
-                printf("Stalemate!\n");
-            }
+        if(pturn==1 & game==1){
             //add line to keep trying moves if still in check
             while((!isValid(position,start,end,p1CR,EPP,EPL)) | !ownPiece){
                 ownPiece=0;
@@ -53,6 +48,14 @@ int main(void){
                 end=getMove(position);
                 if((position[start]>'A' & position[start]<'Z') | position[start]=='-'){
                     ownPiece=1;
+                }
+                for(int i=0; i<64; i++){
+                    dummy[i]=position[i];
+                }
+                dummy[end]=dummy[start];
+                dummy[start]='-';
+                if(check(dummy, pturn)){
+                    ownPiece=0;
                 }
             }
             
@@ -82,25 +85,37 @@ int main(void){
             ownPiece=0;
             printf("end P1 turn\n");
             pturn=2;
-        }
-        if(pturn==2){
+            //Checkmate or stalemate?
             mate=checkmate(position, pturn, EPP, EPL);
-            if(check(position,pturn)){
+            if(check(position, pturn)){
                 printf("P2 in check!\n");
                 if(mate==1){
                     printf("P2 in checkmate!\n");
+                    game=3;
                 }
             }
             else if(mate==1){
                 printf("Stalemate!\n");
+                game=0;
             }
-            //add line to keep trying moves if still in check
+        }
+        //add line to keep trying moves if still in check       
+        if(pturn==2 & game==1){
             while((!isValid(position,start,end,p2CR,EPP,EPL)) | !ownPiece){
+
                 ownPiece=0;
                 start=getMove(position);
                 end=getMove(position);
                 if((position[start]>'a' & position[start]<'z') | position[start]=='-'){
                     ownPiece=1;
+                }
+                for(int i=0; i<64; i++){
+                    dummy[i]=position[i];
+                }
+                dummy[end]=dummy[start];
+                dummy[start]='-';
+                if(check(dummy, pturn)){
+                    ownPiece=0;
                 }
             }
             movePiece(position, start, end, p2CR, EPP, EPL);
@@ -128,6 +143,18 @@ int main(void){
             ownPiece=0;
             printf("end P2 turn\n");
             pturn=1;
+            //Checkmate or stalemate?
+            mate=checkmate(position, pturn, EPP, EPL);
+            if(check(position,pturn)){
+                printf("P1 in check!\n");
+                if(mate==1){
+                    printf("P1 in checkmate!\n");
+                    game=2;
+                }
+            }
+            else if(mate==1){
+                printf("Stalemate!\n");
+            }
         }
         //start=getMove(position);
         //printf("the piece is in %d place\n",start);
