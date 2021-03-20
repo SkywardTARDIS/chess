@@ -1,3 +1,7 @@
+This game of chess was programmed by Joshua Nicholls, to be played on the Raspberry Pi 3 sense hat,
+using the LED screen as a playing board
+
+############################################################################################################
 here is the line to compile:
 cc -o chess chess.c -L ~/lib -I ~/include -lsense
 
