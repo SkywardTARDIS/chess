@@ -76,8 +76,19 @@ char promotion(char *position, int begin){
     //
     pi_joystick_t* joystick=getJoystickDevice();
     char piece='a';
+    if(position[begin]=='p'){
+        bm->pixel[7-cursorpos%8][cursorpos/8]=BQ;
+        piece='q';
+    }
+    else{
+        bm->pixel[7-cursorpos%8][cursorpos/8]=WQ;
+        piece='Q';
+    }
+
     while(selected){
         pollJoystick(joystick,promotionFunc,1000);
+        printf("previous %d\n",lastpager);
+        printf("current %d\n",promPager);
         if(lastpager!=promPager){
             switch(promPager%4){
                 case 0:
@@ -120,10 +131,23 @@ char promotion(char *position, int begin){
                         piece='N';
                     }
                     break;
+                default:
+                    if(position[begin]=='p'){
+                        bm->pixel[7-cursorpos%8][cursorpos/8]=BQ;
+                        piece='q';
+                    }
+                    else{
+                        bm->pixel[7-cursorpos%8][cursorpos/8]=WQ;
+                        piece='Q';
+                    }
+
+                    break;
             }
-            if(promPager>11){
+            printf("%c\n", piece);
+            if(promPager>7){
                 selected=0;
             }
+            lastpager=promPager;
         }
     }
     return piece;

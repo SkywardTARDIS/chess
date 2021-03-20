@@ -8,7 +8,6 @@
 bool Queen(char *position, int j, int k, int m, int n){
     //rook
     if(j==m ^ k==n){
-        printf("rook\n");
         if(j>m){
             printf("right");
             for(int i=(j-1); i>m; i--){
@@ -47,7 +46,6 @@ bool Queen(char *position, int j, int k, int m, int n){
         }
     }
     else if(abs(j-m)==abs(k-n)){
-        printf("bishop\n");
         if(j>m & k>n){
             for(int i=1; (j-i)>m; i++){
                 if(position[gridToPos(j-i, k-i)]!='-'){

@@ -64,7 +64,7 @@ int main(void){
                 }
             }
             
-            movePiece(position, start, end, p1CR, EPP, EPL);
+            movePiece(position, start, end, p1TR, EPP, EPL);
             //En Passant
             if(EPP==1){
                 EPP=0;
@@ -86,6 +86,12 @@ int main(void){
                     p1CR=1;
                 }
             }
+            //Promotion:
+            if(position[end]=='P' & end<=7){
+                printf("promotion time\n");
+                position[end]=promotion(position, end);
+            }
+
             //temporary rights
             p1TR=castleCheck(position, 1, p1CR);
             p2TR=castleCheck(position, 2, p2CR);
@@ -93,7 +99,6 @@ int main(void){
             ownPiece=0;
             printf("end P1 turn\n");
             pturn=2;
-            //temporary castling rights:
             
 
             //Checkmate or stalemate?
@@ -151,6 +156,12 @@ int main(void){
                     p2CR=1;
                 }
             }
+
+            //promotion
+            if(position[end]=='p' & end>=56){
+                position[end]=promotion(position, end);
+            }
+
             //temporary rights
             p1TR=castleCheck(position, 1, p1CR);
             p2TR=castleCheck(position, 2, p2CR);           

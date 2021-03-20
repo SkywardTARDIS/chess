@@ -5,7 +5,7 @@
 #include <stdbool.h>
 
 bool Rook(char *position, int j, int k, int m, int n){
-            printf("rook\n");
+            //printf("rook\n");
             if(j==m ^ k==n){
                 if(j>m){
                     for(int i=(j-1); i>m; i--){
