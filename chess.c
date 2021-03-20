@@ -28,8 +28,10 @@ int main(void){
     int ownPiece=0;
 
     while(game){
-        
         if(pturn==1){
+            if(check(position, pturn)){
+                printf("P1 in check!\n");
+            }
             //add line to keep trying moves if still in check
             while((!isValid(position,start,end,p1CR,EPP,EPL)) | !ownPiece){
                 ownPiece=0;
@@ -68,6 +70,9 @@ int main(void){
             pturn=2;
         }
         if(pturn==2){
+            if(check(position,pturn)){
+                printf("P2 in check!\n");
+            }
             //add line to keep trying moves if still in check
             while((!isValid(position,start,end,p2CR,EPP,EPL)) | !ownPiece){
                 ownPiece=0;

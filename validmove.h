@@ -30,7 +30,7 @@ _Bool isValid(char *position, int start, int end, int CR, _Bool EP, int EPL){
     if((simp <= 'Z') & (simp >= 'A')){
         player = 1;
     }
-    printf("%c\n",simp);
+    //printf("%c\n",simp);
     switch(simp){
         case 'r':
             simp = 'R';
@@ -51,26 +51,26 @@ _Bool isValid(char *position, int start, int end, int CR, _Bool EP, int EPL){
             simp = 'P';
             break;
     }
-    printf("%c\n",simp);
+    //printf("%c\n",simp);
     switch(simp){
         case 'R':
-            printf("rook\n");
+            //printf("rook\n");
             return Rook(position, j, k, m, n);
             break;
         case 'N':
-            printf("knight\n");
+            //printf("knight\n");
             return Knight(position, j, k, m, n);
             break;
         case 'B':
-            printf("bishop\n");
+            //printf("bishop\n");
             return Bishop(position, j, k, m, n);
             break;
         case 'Q':
-            printf("%d\n",Queen(position, j, k, m, n));
+            //printf("%d\n",Queen(position, j, k, m, n));
             return Queen(position, j, k, m, n);    
             break;
         case 'P':
-            printf("pawn\n");
+            //printf("pawn\n");
             if((k==6 & n==4) & j==m){
                 //printf("c1\n");
                 if(position[start-8]=='-' & position[start-16]=='-'){
@@ -135,7 +135,7 @@ _Bool isValid(char *position, int start, int end, int CR, _Bool EP, int EPL){
             }
             break;
         case 'K':
-            printf("king %d %d\n", abs(j-m), abs(k-n)>1);
+            //printf("king %d %d\n", abs(j-m), abs(k-n)>1);
             if(CR>0 & (abs(j-m)==2 | abs(k-n)==2)){
                 printf("c1\n");
                 if(end==(start+2) & (CR%2)==1){
