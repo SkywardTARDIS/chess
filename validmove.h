@@ -72,7 +72,7 @@ _Bool isValid(char *position, int start, int end, int CR, _Bool EP, int EPL){
         case 'P':
             //printf("pawn\n");
             if((k==6 & n==4) & j==m){
-                //printf("c1\n");
+                //printf("P1\n");
                 if(position[start-8]=='-' & position[start-16]=='-'){
                     return true;
                 }
@@ -81,7 +81,7 @@ _Bool isValid(char *position, int start, int end, int CR, _Bool EP, int EPL){
                 }
             }
             else if((k==1 & n==3) & j==m){
-                //printf("c2\n");
+                //printf("P2\n");
                 if(position[start+8]=='-' & position[start+16]=='-'){
                     return true;
                 }
@@ -90,7 +90,7 @@ _Bool isValid(char *position, int start, int end, int CR, _Bool EP, int EPL){
                 }
             }
             else if(EP & (EPL==end)){
-                //printf("c3\n");
+                //printf("P3\n");
                 if((n==k-1 & end==EPL & (m==j+1 | m==j-1)) & player==1){
                 }
                 else if((n==k+1 & end==EPL & (m==j+1 | m==j-1)) & player==2) {
@@ -100,7 +100,7 @@ _Bool isValid(char *position, int start, int end, int CR, _Bool EP, int EPL){
                 }
             }
             else{
-                //printf("c4\n");
+                //printf("P4\n");
                 if((player==1 & end==(start-8)) & position[end]=='-'){
                     //printf("c1\n");
                     return true;
@@ -109,7 +109,7 @@ _Bool isValid(char *position, int start, int end, int CR, _Bool EP, int EPL){
                     //printf("c2\n");
                     return true;
                 }
-                else if(player==1 & (end==(start-9) | end==(start-7))){
+                else if(player==1 & ((end==(start-9) & j!=7) | (end==(start-7) & j!=0))){
                     //printf("c1\n");
                     //printf("%c %c\n",position[start],position[end]);
                     if(position[end]!='-'){
@@ -119,7 +119,7 @@ _Bool isValid(char *position, int start, int end, int CR, _Bool EP, int EPL){
                         return false;
                     }
                 }
-                else if(player==2 & (end==(start+7) | end==(start+9))){
+                else if(player==2 & ((end==(start+7) & j!=7) | (end==(start+9) & j!=0))){
                     //printf("c2\n");
                     if(position[end]!='-'){
                         return true;

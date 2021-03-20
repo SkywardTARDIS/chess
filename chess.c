@@ -4,12 +4,16 @@
 #include "movepiece.h"
 #include <stdbool.h>
 #include "cursor.h"
+#include <string.h>
+#include "checkmate.h"
+
 int game=1;
 int pturn=1;
 int p1CR = 3;
 int p2CR = 3;
 int main(void){
     char position[] = "rnbqkbnrpppppppp--------------------------------PPPPPPPPRNBQKBNR";
+
 //int main(void){  
     //
     pi_framebuffer_t *fb=getFrameBuffer();
@@ -28,9 +32,13 @@ int main(void){
     int ownPiece=0;
 
     while(game){
+
         if(pturn==1){
             if(check(position, pturn)){
                 printf("P1 in check!\n");
+                if(checkmate(position, pturn, EPP, EPL)){
+                    printf("P1 in checkmate!\n");
+                }
             }
             //add line to keep trying moves if still in check
             while((!isValid(position,start,end,p1CR,EPP,EPL)) | !ownPiece){
@@ -72,6 +80,9 @@ int main(void){
         if(pturn==2){
             if(check(position,pturn)){
                 printf("P2 in check!\n");
+                if(checkmate(position, pturn, EPP, EPL)){
+                    printf("P1 in checkmate!\n");
+                }
             }
             //add line to keep trying moves if still in check
             while((!isValid(position,start,end,p2CR,EPP,EPL)) | !ownPiece){
