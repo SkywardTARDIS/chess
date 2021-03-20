@@ -5,3 +5,16 @@ Except, the program has already been compiled in this folder.
 To run the game, type 
 
 ./chess
+
+
+To clear your screen afterwards, type
+
+./clear
+
+
+############################################################################################################
+Rules of play: Each piece moves as normally in chess
+To move a piece, first select your own piece.
+Then, select the space you wish to move it to
+
+If you wish to agree to resign or a draw, on your turn, click on the SAME unoccupied square twice in a row to open the menu
