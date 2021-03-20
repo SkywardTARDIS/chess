@@ -6,11 +6,16 @@
 #include "cursor.h"
 #include <string.h>
 #include "checkmate.h"
+#include "castlingRights.h"
 
 int game=1;
 int pturn=1;
+//absolute castling rights
 int p1CR = 3;
 int p2CR = 3;
+//temporary or infringed rights
+int p1TR = 3;
+int p2TR = 3;
 int main(void){
     char position[] = "rnbqkbnrpppppppp--------------------------------PPPPPPPPRNBQKBNR";
     char dummy[]="----------------------------------------------------------------";
@@ -42,7 +47,7 @@ int main(void){
 
         if(pturn==1 & game==1){
             //add line to keep trying moves if still in check
-            while((!isValid(position,start,end,p1CR,EPP,EPL)) | !ownPiece){
+            while((!isValid(position,start,end,p1TR,EPP,EPL)) | !ownPiece){
                 ownPiece=0;
                 start=getMove(position);
                 end=getMove(position);
@@ -72,7 +77,7 @@ int main(void){
             //Castling Rights
             if(p1CR>0){
                 if(position[60]!='K' | (position[63]!='R' & position[56]!='R')){
-                    p1CR=0;
+                    p1CR=-1;
                 }
                 else if(position[63]!='R'){
                     p1CR=2;
@@ -81,10 +86,16 @@ int main(void){
                     p1CR=1;
                 }
             }
+            //temporary rights
+            p1TR=castleCheck(position, 1, p1CR);
+            p2TR=castleCheck(position, 2, p2CR);
 
             ownPiece=0;
             printf("end P1 turn\n");
             pturn=2;
+            //temporary castling rights:
+            
+
             //Checkmate or stalemate?
             mate=checkmate(position, pturn, EPP, EPL);
             if(check(position, pturn)){
@@ -101,7 +112,7 @@ int main(void){
         }
         //add line to keep trying moves if still in check       
         if(pturn==2 & game==1){
-            while((!isValid(position,start,end,p2CR,EPP,EPL)) | !ownPiece){
+            while((!isValid(position,start,end,p2TR,EPP,EPL)) | !ownPiece){
 
                 ownPiece=0;
                 start=getMove(position);
@@ -118,7 +129,7 @@ int main(void){
                     ownPiece=0;
                 }
             }
-            movePiece(position, start, end, p2CR, EPP, EPL);
+            movePiece(position, start, end, p2TR, EPP, EPL);
             //En Passant
             if(EPP==1){
                 EPP=0;
@@ -131,7 +142,7 @@ int main(void){
             //Castling Rights
             if(p2CR>0){
                 if(position[4]!='k' | (position[7]!='r' & position[0]!='r')){
-                    p2CR=0;
+                    p2CR=-1;
                 }
                 else if(position[7]!='r'){
                     p2CR=2;
@@ -140,6 +151,10 @@ int main(void){
                     p2CR=1;
                 }
             }
+            //temporary rights
+            p1TR=castleCheck(position, 1, p1CR);
+            p2TR=castleCheck(position, 2, p2CR);           
+
             ownPiece=0;
             printf("end P2 turn\n");
             pturn=1;
