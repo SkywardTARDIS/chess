@@ -4,7 +4,8 @@
 #include "movepiece.h"
 #include <stdbool.h>
 #include "cursor.h"
-
+int game=1;
+int pturn=1;
 int main(void){
     char position[] = "rnbqkbnrpppppppp--------------------------------PPPPPPPPRNBQKBNR";
 //int main(void){  
@@ -19,10 +20,41 @@ int main(void){
     int p1CR = 3;
     int p2CR = 3;
     //
-    int place1;
-    int place2;
-    place1=getMove(position);
-    printf("the piece is in %d place\n",place1);
+    int start;
+    int end;
+    bool EPP=false;
+    int EPL=-1;
+
+    while(game){
+        
+        if(pturn==1){
+            //add line to keep trying moves if still in check
+            while((!isValid(position,start,end,p1CR,EPP,EPL))){
+                start=getMove(position);
+                end=getMove(position);
+            }
+            
+            movePiece(position, start, end, p1CR, EPP, EPL);
+
+            pturn=2;
+        }
+        if(pturn==2){
+            //add line to keep trying moves if still in check
+            while((!isValid(position,start,end,p1CR,EPP,EPL))){
+                start=getMove(position);
+                end=getMove(position);
+            }
+            movePiece(position, start, end, p1CR, EPP, EPL);
+        
+            pturn=1;
+        }
+        //start=getMove(position);
+        //printf("the piece is in %d place\n",start);
+            
+    
+    
+    
+    }
     //
     /*
     movePiece(position, gridToPos(4,6), gridToPos(4,4), 3, false, -1);

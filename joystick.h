@@ -1,7 +1,12 @@
 #include "sense.h"
 #include <linux/input.h>
 #include <stdio.h>
-
+//
+//NOW DEFUNCT PROGRAM
+//
+//
+//
+//
 
 /* using a char as a number because it doesn't need to be large.
  * Doing it because I _can_, not because I need to */

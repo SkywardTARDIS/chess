@@ -110,13 +110,22 @@ _Bool isValid(char *position, int start, int end, int CR, _Bool EP, int EPL){
                     return true;
                 }
                 else if(player==1 & (end==(start-9) | end==(start-7))){
+                    //printf("c1\n");
+                    //printf("%c %c\n",position[start],position[end]);
                     if(position[end]!='-'){
                         return true;
                     }
+                    else{
+                        return false;
+                    }
                 }
                 else if(player==2 & (end==(start+7) | end==(start+9))){
+                    //printf("c2\n");
                     if(position[end]!='-'){
                         return true;
+                    }
+                    else{
+                        return false;
                     }
                 }
                 else{
@@ -126,8 +135,9 @@ _Bool isValid(char *position, int start, int end, int CR, _Bool EP, int EPL){
             }
             break;
         case 'K':
-            printf("king\n");
-            if(CR>0){
+            printf("king %d %d\n", abs(j-m), abs(k-n)>1);
+            if(CR>0 & (abs(j-m)==2 | abs(k-n)==2)){
+                printf("c1\n");
                 if(end==(start+2) & (CR%2)==1){
                     //castle short
                     if(position[end]=='-' & position[end-1]=='-'){
@@ -151,7 +161,8 @@ _Bool isValid(char *position, int start, int end, int CR, _Bool EP, int EPL){
                 }
             }
             else{
-                if(abs(j-m)<2 & abs(j-n)<2){
+                printf("c2\n");
+                if(abs(j-m)<2 & abs(k-n)<2){
                     return true;
                 }
                 else{
