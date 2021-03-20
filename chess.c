@@ -6,6 +6,8 @@
 #include "cursor.h"
 int game=1;
 int pturn=1;
+int p1CR = 3;
+int p2CR = 3;
 int main(void){
     char position[] = "rnbqkbnrpppppppp--------------------------------PPPPPPPPRNBQKBNR";
 //int main(void){  
@@ -16,9 +18,6 @@ int main(void){
     setPos(position);
     //
     bm->pixel[3][4]=CC;
-    //
-    int p1CR = 3;
-    int p2CR = 3;
     //
     int start;
     int end;
@@ -42,7 +41,7 @@ int main(void){
             }
             
             movePiece(position, start, end, p1CR, EPP, EPL);
-
+            //En Passant
             if(EPP==1){
                 EPP=0;
                 EPL=-1;
@@ -51,6 +50,19 @@ int main(void){
                 EPP=1;
                 EPL=start-8;
             }
+            //Castling Rights
+            if(p1CR>0){
+                if(position[60]!='K' | (position[63]!='R' & position[56]!='R')){
+                    p1CR=0;
+                }
+                else if(position[63]!='R'){
+                    p1CR=2;
+                }
+                else if(position[56]!='R'){
+                    p1CR=1;
+                }
+            }
+
             ownPiece=0;
             printf("end P1 turn\n");
             pturn=2;
@@ -66,7 +78,7 @@ int main(void){
                 }
             }
             movePiece(position, start, end, p2CR, EPP, EPL);
-            
+            //En Passant
             if(EPP==1){
                 EPP=0;
                 EPL=-1;
@@ -74,6 +86,18 @@ int main(void){
             if(end==(start+16) & position[end]=='p'){
                 EPP=1;
                 EPL=start+8;
+            }
+            //Castling Rights
+            if(p2CR>0){
+                if(position[4]!='k' | (position[7]!='r' & position[0]!='r')){
+                    p2CR=0;
+                }
+                else if(position[7]!='r'){
+                    p2CR=2;
+                }
+                else if(position[0]!='r'){
+                    p2CR=1;
+                }
             }
             ownPiece=0;
             printf("end P2 turn\n");
