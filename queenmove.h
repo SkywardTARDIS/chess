@@ -9,7 +9,7 @@ bool Queen(char *position, int j, int k, int m, int n){
     //rook
     if(j==m ^ k==n){
         if(j>m){
-            printf("right");
+            //printf("right");
             for(int i=(j-1); i>m; i--){
                 if(position[gridToPos(i,k)]!='-'){
                     return false;
@@ -18,7 +18,7 @@ bool Queen(char *position, int j, int k, int m, int n){
             return true;
         }
         if(j<m){
-            printf("left");
+            //printf("left");
             for(int i=(j+1); i<m; i++){
                 if(position[gridToPos(i,k)]!='-'){
                     return false;
@@ -27,7 +27,7 @@ bool Queen(char *position, int j, int k, int m, int n){
             return true;
         }
         if(k>n){
-            printf("up");
+            //printf("up");
             for(int i=(k-1); i>n; i--){
                 if(position[gridToPos(j,i)]!='-'){
                     return false;
@@ -36,7 +36,7 @@ bool Queen(char *position, int j, int k, int m, int n){
             return true;
         }
         if(k<n){
-            printf("down");
+            //printf("down");
             for(int i=(k+1); i<n; i++){
                 if(position[gridToPos(j,i)]!='-'){
                     return false;
@@ -80,7 +80,7 @@ bool Queen(char *position, int j, int k, int m, int n){
         }
     }
     else{
-        printf("none\n");
+        //printf("none\n");
         return false;
     }
 }

@@ -137,7 +137,7 @@ _Bool isValid(char *position, int start, int end, int CR, _Bool EP, int EPL){
         case 'K':
             //printf("king %d %d\n", abs(j-m), abs(k-n)>1);
             if(CR>0 & (abs(j-m)==2 | abs(k-n)==2)){
-                printf("c1\n");
+                //printf("c1\n");
                 if(end==(start+2) & (CR%2)==1){
                     //castle short
                     if(position[end]=='-' & position[end-1]=='-'){
@@ -161,7 +161,7 @@ _Bool isValid(char *position, int start, int end, int CR, _Bool EP, int EPL){
                 }
             }
             else{
-                printf("c2\n");
+                //printf("c2\n");
                 if(abs(j-m)<2 & abs(k-n)<2){
                     return true;
                 }

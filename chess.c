@@ -91,7 +91,7 @@ int main(void){
             }
             //Promotion:
             if(position[end]=='P' & end<=7){
-                printf("promotion time\n");
+                //printf("promotion time\n");
                 position[end]=promotion(position, end);
             }
 

@@ -38,7 +38,7 @@ int draw(void){
     clearFrameBuffer(fb,BLACK);
     for(int i=0; i<=7; i++){
         for(int j=0; j<=i; j++){
-            bm->pixel[7-i][j]=WHITE;
+            bm->pixel[i][j]=WHITE;
         }
     }
     return 0;

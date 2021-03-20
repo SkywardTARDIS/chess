@@ -89,8 +89,8 @@ char promotion(char *position, int begin){
 
     while(selected){
         pollJoystick(joystick,promotionFunc,1000);
-        printf("previous %d\n",lastpager);
-        printf("current %d\n",promPager);
+        //printf("previous %d\n",lastpager);
+        //printf("current %d\n",promPager);
         if(lastpager!=promPager){
             switch(promPager%4){
                 case 0:
@@ -145,7 +145,7 @@ char promotion(char *position, int begin){
 
                     break;
             }
-            printf("%c\n", piece);
+            //printf("%c\n", piece);
             if(promPager>7){
                 selected=0;
             }
@@ -174,7 +174,8 @@ int menu(char *position){
     pi_framebuffer_t *fb=getFrameBuffer();
     sense_fb_bitmap_t *bm=fb->bitmap;
     //
-    pi_joystick_t* joystick=getJoystickDevice();   
+    pi_joystick_t* joystick=getJoystickDevice();
+    resume();
     while(menSelect){
         pollJoystick(joystick, menuFunc,1000);
         if(lastMen!=menPager){

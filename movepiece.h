@@ -20,7 +20,7 @@ bool movePiece(char *position, int begin, int end, int CR, bool EP, int EPL){
         else if(CR>1 & (begin==(end+2))){
             //castle long
             if((position[begin]=='k' | position[begin]=='K') & (begin==(end+2))){
-                printf("long");
+                //printf("long");
                 position[begin-1] = position[begin-4];
                 position[begin-4] = '-';
             }

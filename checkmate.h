@@ -8,7 +8,7 @@ bool checkmate(char *position, int player, bool EP, int EPL){
     for(int i=0; i<64; i++){
         dummy[i]=position[i];
     }
-    printf("%s\n",dummy);
+    //printf("%s\n",dummy);
     char holder='-';
     if(player==1){
         for(int i=0; i<64; i++){
@@ -19,7 +19,7 @@ bool checkmate(char *position, int player, bool EP, int EPL){
                         dummy[j]=dummy[i];
                         dummy[i]='-';
                         if(!check(dummy, player)){
-                            printf("%s\n",dummy);
+                            //printf("%s\n",dummy);
                             return false;
                         }
                         dummy[i]=dummy[j];
