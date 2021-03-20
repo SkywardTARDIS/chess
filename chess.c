@@ -28,17 +28,23 @@ int main(void){
     //en passant true/false, and location of capture
     bool EPP=false;
     int EPL=-1;
+    //checks for either stale or checkmate
+    int mate=0;
     //you can only move your own pieces
     int ownPiece=0;
 
     while(game){
 
         if(pturn==1){
+            mate=checkmate(position, pturn, EPP, EPL);
             if(check(position, pturn)){
                 printf("P1 in check!\n");
-                if(checkmate(position, pturn, EPP, EPL)){
+                if(mate==1){
                     printf("P1 in checkmate!\n");
                 }
+            }
+            else if(mate==1){
+                printf("Stalemate!\n");
             }
             //add line to keep trying moves if still in check
             while((!isValid(position,start,end,p1CR,EPP,EPL)) | !ownPiece){
@@ -78,11 +84,15 @@ int main(void){
             pturn=2;
         }
         if(pturn==2){
+            mate=checkmate(position, pturn, EPP, EPL);
             if(check(position,pturn)){
                 printf("P2 in check!\n");
-                if(checkmate(position, pturn, EPP, EPL)){
-                    printf("P1 in checkmate!\n");
+                if(mate==1){
+                    printf("P2 in checkmate!\n");
                 }
+            }
+            else if(mate==1){
+                printf("Stalemate!\n");
             }
             //add line to keep trying moves if still in check
             while((!isValid(position,start,end,p2CR,EPP,EPL)) | !ownPiece){
