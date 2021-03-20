@@ -2,9 +2,11 @@
 #include <linux/input.h>
 #include <stdio.h>
 #define CC 0x3249
+#include "menuMaps.h"
 
 int cursorpos=36;
 int promPager=0;
+int menPager=0;
 
 void callbackFunc(unsigned int code){
     if(code == KEY_UP) {
@@ -152,3 +154,61 @@ char promotion(char *position, int begin){
     }
     return piece;
 }
+
+void menuFunc(unsigned int code){
+    if(code==KEY_UP | code==KEY_DOWN | code==KEY_RIGHT | code==KEY_LEFT){
+        menPager+=1;
+    }
+    menPager=menPager%4;
+    if(code==KEY_ENTER){
+        menPager+=8;
+    }
+}
+
+
+int menu(char *position){
+    int menSelect=1;
+    int lastMen=menPager;
+    int gameBreak;
+    //
+    pi_framebuffer_t *fb=getFrameBuffer();
+    sense_fb_bitmap_t *bm=fb->bitmap;
+    //
+    pi_joystick_t* joystick=getJoystickDevice();   
+    while(menSelect){
+        pollJoystick(joystick, menuFunc,1000);
+        if(lastMen!=menPager){
+            switch(menPager%4){
+                case 0:
+                    resume();
+                    gameBreak=1;
+                    break;
+                case 1:
+                    draw();
+                    gameBreak=0;
+                    break;
+                case 2:
+                    whiteRes();
+                    gameBreak=3;
+                    break;
+                case 3:
+                    blackRes();
+                    gameBreak=2;
+                    break;
+            }
+            lastMen=menPager;
+            if(menPager>7){
+                menSelect=0;
+            }
+        }
+    }
+    if(gameBreak==1){
+        setPos(position);
+    }
+    return gameBreak;
+}
+
+
+
+
+

@@ -47,7 +47,7 @@ int main(void){
 
         if(pturn==1 & game==1){
             //add line to keep trying moves if still in check
-            while((!isValid(position,start,end,p1TR,EPP,EPL)) | !ownPiece){
+            while(((!isValid(position,start,end,p1TR,EPP,EPL)) | !ownPiece) & game==1){
                 ownPiece=0;
                 start=getMove(position);
                 end=getMove(position);
@@ -61,6 +61,9 @@ int main(void){
                 dummy[start]='-';
                 if(check(dummy, pturn)){
                     ownPiece=0;
+                }
+                if((start==end) & position[start]=='-'){
+                    game=menu(position);
                 }
             }
             
@@ -117,7 +120,7 @@ int main(void){
         }
         //add line to keep trying moves if still in check       
         if(pturn==2 & game==1){
-            while((!isValid(position,start,end,p2TR,EPP,EPL)) | !ownPiece){
+            while(((!isValid(position,start,end,p2TR,EPP,EPL)) | !ownPiece) & game==1){
 
                 ownPiece=0;
                 start=getMove(position);
@@ -132,6 +135,9 @@ int main(void){
                 dummy[start]='-';
                 if(check(dummy, pturn)){
                     ownPiece=0;
+                }
+                if((start==end) & position[start]=='-'){
+                    game=menu(position);
                 }
             }
             movePiece(position, start, end, p2TR, EPP, EPL);
@@ -188,6 +194,17 @@ int main(void){
     
     
     
+    }
+
+    switch(game){
+        case 0:
+            draw();
+            break;
+        case 2:
+            blackRes();
+            break;
+        case 3:
+            whiteRes();
     }
     //
     /*
