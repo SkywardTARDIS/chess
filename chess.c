@@ -22,16 +22,23 @@ int main(void){
     //
     int start;
     int end;
+    //en passant true/false, and location of capture
     bool EPP=false;
     int EPL=-1;
+    //you can only move your own pieces
+    int ownPiece=0;
 
     while(game){
         
         if(pturn==1){
             //add line to keep trying moves if still in check
-            while((!isValid(position,start,end,p1CR,EPP,EPL))){
+            while((!isValid(position,start,end,p1CR,EPP,EPL)) | !ownPiece){
+                ownPiece=0;
                 start=getMove(position);
                 end=getMove(position);
+                if((position[start]>'A' & position[start]<'Z') | position[start]=='-'){
+                    ownPiece=1;
+                }
             }
             
             movePiece(position, start, end, p1CR, EPP, EPL);
@@ -43,15 +50,20 @@ int main(void){
             if(end==(start-16) & position[end]=='P'){
                 EPP=1;
                 EPL=start-8;
-                printf("p1EP\n");
             }
+            ownPiece=0;
+            printf("end P1 turn\n");
             pturn=2;
         }
         if(pturn==2){
             //add line to keep trying moves if still in check
-            while((!isValid(position,start,end,p2CR,EPP,EPL))){
+            while((!isValid(position,start,end,p2CR,EPP,EPL)) | !ownPiece){
+                ownPiece=0;
                 start=getMove(position);
                 end=getMove(position);
+                if((position[start]>'a' & position[start]<'z') | position[start]=='-'){
+                    ownPiece=1;
+                }
             }
             movePiece(position, start, end, p2CR, EPP, EPL);
             
@@ -62,8 +74,9 @@ int main(void){
             if(end==(start+16) & position[end]=='p'){
                 EPP=1;
                 EPL=start+8;
-                printf("p2EP\n");
             }
+            ownPiece=0;
+            printf("end P2 turn\n");
             pturn=1;
         }
         //start=getMove(position);
