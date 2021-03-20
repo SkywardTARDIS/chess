@@ -36,16 +36,34 @@ int main(void){
             
             movePiece(position, start, end, p1CR, EPP, EPL);
 
+            if(EPP==1){
+                EPP=0;
+                EPL=-1;
+            }
+            if(end==(start-16) & position[end]=='P'){
+                EPP=1;
+                EPL=start-8;
+                printf("p1EP\n");
+            }
             pturn=2;
         }
         if(pturn==2){
             //add line to keep trying moves if still in check
-            while((!isValid(position,start,end,p1CR,EPP,EPL))){
+            while((!isValid(position,start,end,p2CR,EPP,EPL))){
                 start=getMove(position);
                 end=getMove(position);
             }
-            movePiece(position, start, end, p1CR, EPP, EPL);
-        
+            movePiece(position, start, end, p2CR, EPP, EPL);
+            
+            if(EPP==1){
+                EPP=0;
+                EPL=-1;
+            }
+            if(end==(start+16) & position[end]=='p'){
+                EPP=1;
+                EPL=start+8;
+                printf("p2EP\n");
+            }
             pturn=1;
         }
         //start=getMove(position);
