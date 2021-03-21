@@ -1,7 +1,9 @@
 #include "sense.h"
 #include <linux/input.h>
+#include <stdint.h>
 #include <stdio.h>
-#define CC 0x3249
+#define P1 0x3249
+#define P2 0x4986
 #include "menuMaps.h"
 
 int cursorpos=36;
@@ -29,9 +31,14 @@ void callbackFunc(unsigned int code){
     }
 }
 
-int getMove(char *position) {
+int getMove(char *position, int player) {
     int select=1;
     int lastcurse = cursorpos;
+uint16_t CC=P1;
+    if(player==2){
+        CC=P2;
+    }
+    int oscillate=0;
     //
     pi_framebuffer_t *fb=getFrameBuffer();
     sense_fb_bitmap_t *bm=fb->bitmap;
@@ -49,6 +56,16 @@ int getMove(char *position) {
             lastcurse=lastcurse%64;
             setPos(position);
             bm->pixel[7-lastcurse%8][lastcurse/8]=CC;
+        }
+        if(lastcurse==cursorpos){
+            if(oscillate){
+                bm->pixel[7-lastcurse%8][lastcurse/8]=CC;
+                oscillate=0;
+            }
+            else{
+                oscillate=1;
+                setPos(position);
+            }
         }
     }
     //printf("%d\n",lastcurse);

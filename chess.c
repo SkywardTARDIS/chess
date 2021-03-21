@@ -29,7 +29,7 @@ int main(void){
     //
     setPos(position);
     //
-    bm->pixel[3][4]=CC;
+    bm->pixel[3][4]=P1;
     //
     int start;
     int end;
@@ -49,8 +49,8 @@ int main(void){
             //add line to keep trying moves if still in check
             while(((!isValid(position,start,end,p1TR,EPP,EPL)) | !ownPiece) & game==1){
                 ownPiece=0;
-                start=getMove(position);
-                end=getMove(position);
+                start=getMove(position, pturn);
+                end=getMove(position, pturn);
                 if((position[start]>'A' & position[start]<'Z') | position[start]=='-'){
                     ownPiece=1;
                 }
@@ -123,8 +123,8 @@ int main(void){
             while(((!isValid(position,start,end,p2TR,EPP,EPL)) | !ownPiece) & game==1){
 
                 ownPiece=0;
-                start=getMove(position);
-                end=getMove(position);
+                start=getMove(position, pturn);
+                end=getMove(position, pturn);
                 if((position[start]>'a' & position[start]<'z') | position[start]=='-'){
                     ownPiece=1;
                 }
