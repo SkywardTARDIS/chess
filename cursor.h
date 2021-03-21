@@ -224,10 +224,47 @@ int menu(char *position){
     if(gameBreak==1){
         setPos(position);
     }
+    menPager=1;
     return gameBreak;
 }
 
+//Game Over selection
+int gameOver(char *position, int state){
+    int exit=1;
+    int lastMen=menPager;
 
+    pi_framebuffer_t *fb=getFrameBuffer();
+
+    pi_joystick_t* joystick=getJoystickDevice();
+    while(exit){
+        pollJoystick(joystick, menuFunc,1000);
+        if(lastMen!=menPager){
+            switch(menPager%2){
+                case 0:
+                    switch(state){
+                        case 0:
+                            draw();
+                            break;
+                        case 2:
+                            blackRes();
+                            break;
+                        case 3:
+                            whiteRes();
+                            break;
+                    }
+                    break;
+                case 1:
+                    setPos(position);
+            }
+        }
+        lastMen=menPager;
+        if(menPager>7){
+            exit=0;
+        }
+    }
+   clearFrameBuffer(fb,BLACK);
+   return 0;
+}
 
 
 

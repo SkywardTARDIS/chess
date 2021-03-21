@@ -206,6 +206,8 @@ int main(void){
         case 3:
             whiteRes();
     }
+    sleep(2);
+    gameOver(position, game);
     //
     /*
     movePiece(position, gridToPos(4,6), gridToPos(4,4), 3, false, -1);
