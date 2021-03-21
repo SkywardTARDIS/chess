@@ -56,6 +56,7 @@ uint16_t CC=P1;
             lastcurse=lastcurse%64;
             setPos(position);
             bm->pixel[7-lastcurse%8][lastcurse/8]=CC;
+            oscillate=0;
         }
         if(lastcurse==cursorpos){
             if(oscillate){
